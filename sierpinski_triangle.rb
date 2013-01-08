@@ -35,21 +35,46 @@ end
 class SierpinskiTriangleDrawer < Processing::App
 
 	def setup
+		size(600, 600)
+	    background(0)
+	    stroke(0, 250, 0)
+	    smooth
+		fill(0, 250, 0)
+
+	    p1 = Point.new(10, 580)
+	    p2 = Point.new(300, 10)
+	    p3 = Point.new(590, 580)
+	    @triangles = []
+	    @triangles << SierpinskiTriangle.new(p1, p2, p3)
 	end
 
 	def draw
+		background(0)
+		@triangles.each do |t|
+			triangle(t.p1.x, t.p1.y, t.p2.x, t.p2.y, t.p3.x, t.p3.y)
+		end
 	end
 
 	def mouse_clicked
+		new_triangles = []
+		if mouse_button == LEFT
+			@triangles.each do |t|
+				t.split.each{ |i| new_triangles << i }
+			end
+		else
+			return @triangles if @triangles.size == 1
+			(0...@triangles.size).step(3) do |i|
+				p1 = @triangles[i].p1
+				p2 = @triangles[i+1].p2
+				p3 = @triangles[i+2].p3
+				new_triangles << SierpinskiTriangle.new(p1, p2, p3)
+			end
+		end
+
+		@triangles = new_triangles
+		puts "number of triangles: #{@triangles.size}"
 	end
 
 end
 
 SierpinskiTriangleDrawer.new	
-
-p1 = Point.new(1, 1)
-p2 = Point.new(1, 1)
-p3 = Point.new(1, 1)
-st = SierpinskiTriangle.new(p1, p2, p3)
-
-st.split
