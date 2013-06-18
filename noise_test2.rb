@@ -5,7 +5,7 @@ class NoiseTest2 < Processing::App
   def setup
     size(600, 600)
     @tx = 0
-      @ty = 100
+    @ty = 100
   end	
 
   def draw
@@ -20,11 +20,7 @@ class NoiseTest2 < Processing::App
       @tx += 0.1
     end
     update_pixels
-
   end
-
-
 end
-
 
 NoiseTest2.new

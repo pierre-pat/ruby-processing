@@ -1,14 +1,5 @@
 require 'ruby-processing'
 
-class Point
-  attr_accessor :x, :y
-
-  def initialize x, y
-    @x, @y = x, y
-  end
-
-end
-
 class KochLine
 
   attr_accessor :start_pt, :end_pt
@@ -23,8 +14,8 @@ class KochCurve
   attr_accessor :koch_lines, :start_pt, :end_pt
 
   def initialize
-    @start_pt = Point.new 10, 240
-    @end_pt = Point.new 590, 240
+    @start_pt = PVector.new 10, 240
+    @end_pt = PVector.new 590, 240
     @koch_lines = [KochLine.new(@start_pt, @end_pt)]
   end
 
@@ -61,19 +52,19 @@ class KochCurve
   def one_third line
     x = line.start_pt.x + (line.end_pt.x - line.start_pt.x) / 3.to_f;
     y = line.start_pt.y + (line.end_pt.y - line.start_pt.y) / 3.to_f;
-    Point.new x, y
+    PVector.new x, y
   end
 
   def middle line
     x = line.start_pt.x + 0.5 * (line.end_pt.x - line.start_pt.x) + (Math::sin(radians(60)) * (line.end_pt.y - line.start_pt.y)) / 3.to_f;
     y = line.start_pt.y + 0.5 * (line.end_pt.y - line.start_pt.y) - (Math::sin(radians(60)) * (line.end_pt.x - line.start_pt.x)) / 3.to_f;
-    Point.new x, y
+    PVector.new x, y
   end
 
   def two_third line
     x = line.start_pt.x + 2 * (line.end_pt.x - line.start_pt.x) / 3.to_f;
     y = line.start_pt.y + 2 * (line.end_pt.y - line.start_pt.y) / 3.to_f;
-    Point.new x, y
+    PVector.new x, y
   end
 
   def radians angle

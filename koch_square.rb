@@ -1,12 +1,5 @@
 require 'ruby-processing'
 
-class Point
-	attr_accessor :x, :y
-	def initialize x, y
-		@x, @y = x, y
-	end
-end
-
 class SquareKoch
 	attr_accessor :points
 	def initialize point, length
@@ -14,9 +7,9 @@ class SquareKoch
 		@points << point
 		cos1 = length * Math.cos(60)
 		sin1 = length * Math.sin(60)
-		p2 = Point.new(point.x, point.y - length)
-		p3 = Point.new(point.x + length, point.y - length)
-		p4 = Point.new(point.x + length, point.y)
+		p2 = PVector.new(point.x, point.y - length)
+		p3 = PVector.new(point.x + length, point.y - length)
+		p4 = PVector.new(point.x + length, point.y)
 
 		points << p2 << p3 << p4
 	end
@@ -26,7 +19,7 @@ class SquareKoch
 		new_points << @points[0]
 
 		@points.each_index do |i|
-			from = @points[i]
+		  from = @points[i]
 		  to_idx = i+1
 		  to_idx = 0 if to_idx >= @points.size
 		  to = @points.at(to_idx)
@@ -35,28 +28,28 @@ class SquareKoch
 		  if from.x == to.x
 		  	l = get_length to.y, from.y
 		  	if from.y > to.y
-		  		p1 = Point.new from.x, from.y - l
-		  		p2 = Point.new from.x - l, from.y - l
-		  		p3 = Point.new from.x - l, from.y - 2*l
-		  		p4 = Point.new from.x, from.y - 2*l
+		  		p1 = PVector.new from.x, from.y - l
+		  		p2 = PVector.new from.x - l, from.y - l
+		  		p3 = PVector.new from.x - l, from.y - 2*l
+		  		p4 = PVector.new from.x, from.y - 2*l
 		  	else
-		  		p1 = Point.new from.x, from.y + l
-		  		p2 = Point.new from.x + l, from.y + l
-		  		p3 = Point.new from.x + l, from.y + 2*l
-		  		p4 = Point.new from.x, from.y + 2*l
+		  		p1 = PVector.new from.x, from.y + l
+		  		p2 = PVector.new from.x + l, from.y + l
+		  		p3 = PVector.new from.x + l, from.y + 2*l
+		  		p4 = PVector.new from.x, from.y + 2*l
 		  	end
 		  else
 		  	l = get_length to.x, from.x
 		  	if from.x > to.x
-		  		p1 = Point.new from.x - l, from.y
-		  		p2 = Point.new from.x - l, from.y + l
-		  		p3 = Point.new from.x - 2*l, from.y + l
-		  		p4 = Point.new from.x - 2*l, from.y
+		  		p1 = PVector.new from.x - l, from.y
+		  		p2 = PVector.new from.x - l, from.y + l
+		  		p3 = PVector.new from.x - 2*l, from.y + l
+		  		p4 = PVector.new from.x - 2*l, from.y
 		  	else
-		  		p1 = Point.new from.x + l, from.y
-		  		p2 = Point.new from.x + l, from.y - l
-		  		p3 = Point.new from.x + 2*l, from.y - l
-		  		p4 = Point.new from.x + 2*l, from.y
+		  		p1 = PVector.new from.x + l, from.y
+		  		p2 = PVector.new from.x + l, from.y - l
+		  		p3 = PVector.new from.x + 2*l, from.y - l
+		  		p4 = PVector.new from.x + 2*l, from.y
 		  	end
 		  end
 
@@ -92,7 +85,7 @@ class KochSquareDrawer < Processing::App
 		size(600,600)
 		background(0)
 		smooth
-		p = Point.new(150, 450)
+		p = PVector.new(150, 450)
 		@koch = SquareKoch.new(p, 300)
 		color_mode RGB, 1.0
 	end

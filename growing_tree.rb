@@ -17,9 +17,6 @@ class TreeDrawer < Processing::App
 		red = color[0..1]
 		green = color[2..3]
 		blue = color[4..5]
-		#puts "#{red.to_i(16)} #{green.to_i(16)} #{blue.to_i(16)} - #{mouse_y}"
-		#puts "#{red} #{green} #{blue} - #{mouse_y}"
-		#stroke red.to_i(16), green.to_i(16), blue.to_i(16)
 		stroke @color[0].to_i(16), @color[1].to_i(16), @color[2].to_i(16)
 		translate width / 2, height
 		line 0, 0, 0, -@original_length
@@ -38,7 +35,9 @@ class TreeDrawer < Processing::App
 		
 		color = get_color
 
-    line 0,0, 0, -h
+		stroke(color[0], color[1], color[2])
+
+    	line 0,0, 0, -h
 		translate 0, -h
 		branch h
 		pop_matrix
@@ -59,7 +58,7 @@ class TreeDrawer < Processing::App
 			c += '0'
 		end
 		puts "#{c[0..1]}, #{c[2..3]}, #{c[4..5]}}"
-		[c[0..1], c[2..3], c[4..5]]
+		[c[0..1].to_i, c[2..3].to_i, c[4..5].to_i]
 	end
 
 	def mouse_clicked
