@@ -17,12 +17,6 @@ class Circle
   end
 
   def draw
-    # fill(@color, @alpha)
-    # ellipse(@location.x, @location.y, @radius*2, @radius*2)
-    # no_fill
-    # stroke_width(2)
-    # stroke(0)
-    # ellipse(@location.x, @location.y, 5, 5)
     fill(@color, @alpha)
     no_stroke
     begin_shape
