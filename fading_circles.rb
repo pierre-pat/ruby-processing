@@ -8,11 +8,35 @@ class Circle
     @color = color(rand(255), rand(255), rand(255))
     @alpha = rand(255)
     @alive = true
+    @xnoises = []
+    @ynoises = []
+    (0...360).each do
+        @xnoises << random(1000)
+        @ynoises << random(1000)
+    end
   end
 
   def draw
+    # fill(@color, @alpha)
+    # ellipse(@location.x, @location.y, @radius*2, @radius*2)
+    # no_fill
+    # stroke_width(2)
+    # stroke(0)
+    # ellipse(@location.x, @location.y, 5, 5)
     fill(@color, @alpha)
-    ellipse(@location.x, @location.y, @radius*2, @radius*2)
+    no_stroke
+    begin_shape
+    (0...360).each do |angle|
+      rad = radians(angle)
+      x = @location.x + (@radius * cos(rad)) + map(noise(@xnoises[angle]), 0, 1, -10, 10)
+      y = @location.y + (@radius * sin(rad)) + map(noise(@ynoises[angle]), 0, 1, -10, 10)
+      vertex(x, y)
+
+      @xnoises[angle] += 0.04
+      @ynoises[angle] += 0.04
+    end
+    end_shape(CLOSE)
+
     no_fill
     stroke_width(2)
     stroke(0)
