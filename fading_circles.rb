@@ -1,7 +1,7 @@
 class Circle
   attr_reader :location, :radius, :alive
   def initialize
-    @radius = random(75)
+    @radius = random(60) + 10
     @location = PVector.new(random(width - @radius), random(height - @radius))
     @xnoise = random(100)
     @ynoise = random(100)
@@ -13,6 +13,10 @@ class Circle
   def draw
     fill(@color, @alpha)
     ellipse(@location.x, @location.y, @radius*2, @radius*2)
+    no_fill
+    stroke_width(2)
+    stroke(0)
+    ellipse(@location.x, @location.y, 5, 5)
   end
 
   def update(circles)
