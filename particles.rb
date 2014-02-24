@@ -23,7 +23,7 @@ class Particle
   end
 
   def display
-  	push_matrix
+    push_matrix
     fill(@color, @lifespan)
     ellipse(@location.x, @location.y, 10, 10)
     pop_matrix

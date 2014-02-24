@@ -1,6 +1,6 @@
 class Circle
   attr_reader :location, :radius, :alive
-  def initialize
+  def initialize(width, height)
     @radius = random(60) + 10
     @location = PVector.new(random(width - @radius), random(height - @radius))
     @xnoise = random(100)
@@ -37,7 +37,7 @@ class Circle
     ellipse(@location.x, @location.y, 5, 5)
   end
 
-  def update(circles)
+  def update(circles, width, height)
     circles.each do |c|
       if c != self
         @alpha -= 1 if intersect(c)
@@ -68,12 +68,12 @@ def draw
   background(150)
   @circles.each do |c|
     c.draw
-    c.update(@circles)
+    c.update(@circles, width, height)
   end
 
   @circles.delete_if{ |c| !c.alive }
 end
 
 def mouse_clicked
-  10.times { @circles << Circle.new }
+  10.times { @circles << Circle.new(width, height) }
 end
